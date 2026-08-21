@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteamRevolver | Library</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="data.js" defer></script>
+    <script src="intro.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- ===== INTRO OVERLAY ===== -->
+    <div id="intro-overlay">
+        <canvas id="intro-canvas"></canvas>
+        <div id="intro-text">
+            <img id="intro-logo" src="https://raw.githubusercontent.com/gibrilphil/CampusGamesDataBase/refs/heads/main/MFR/whitelogo.png" alt="STEAM REVOLVER">
+        </div>
+        <div id="intro-sub">THE DIGITAL GAME ARCHIVE</div>
+        <button id="intro-skip" class="skip-btn">SKIP <i class="fa-solid fa-forward"></i></button>
+    </div>
+
+    <!-- Game Detail Modal -->
+    <div id="game-modal" class="modal hidden">
+        <div id="game-modal-backdrop" class="modal-backdrop"></div>
+        <div id="game-modal-content" class="game-modal-content">
+            <div class="game-modal-banner">
+                <img id="game-modal-banner-img" src="" alt="">
+                <button id="game-modal-close" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="game-modal-body">
+                <div class="game-modal-head">
+                    <img id="game-modal-icon" class="game-modal-icon" src="" alt="">
+                    <div class="game-modal-info">
+                        <h2 id="game-modal-title"></h2>
+                        <span id="game-modal-badge"></span>
+                    </div>
+                </div>
+                <div class="game-modal-actions">
+                    <a id="game-modal-gdrive" href="#" target="_blank" rel="noopener" class="gm-btn gm-gdrive hidden">
+                        <i class="fa-brands fa-google-drive"></i>
+                        <span>Go to Google Drive download</span>
+                    </a>
+                    <a id="game-modal-buzz" href="#" target="_blank" rel="noopener" class="gm-btn gm-buzz hidden">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                        <span>Go to Buzzheather download</span>
+                    </a>
+                    <a id="game-modal-link" href="#" target="_blank" rel="noopener" class="gm-btn gm-link hidden">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>Open game page</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collection Modal -->
+    <div id="collection-modal" class="modal hidden">
+        <div id="modal-backdrop" class="modal-backdrop"></div>
+        <div id="modal-content" class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button id="modal-close" class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-grid" class="modal-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <main id="app">
+        <!-- Header -->
+        <header id="app-header">
+            <div class="header-left">
+                <a href="#space-landing" id="nav-library" class="nav-link active">Library</a>
+                <a href="#franchise-section" id="nav-collections" class="nav-link">Collections</a>
+            </div>
+            <div class="header-right">
+                <button id="search-trigger" class="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Search archive</span>
+                    <kbd>/</kbd>
+                </button>
+                <button id="refresh-btn" class="icon-btn"><i class="fa-solid fa-rotate"></i></button>
+                <button id="profile-btn" class="profile-btn" title="Your account">
+                    <i class="fa-solid fa-user"></i>
+                    <span id="profile-liked-count" class="profile-badge hidden">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scroll Container -->
+        <div id="scroll-area">
+            <!-- Space Landing -->
+            <section id="space-landing">
+                <canvas id="space-canvas"></canvas>
+                <div class="stars stars-1"></div>
+                <div class="stars stars-2"></div>
+                <div class="nebula nebula-1"></div>
+                <div class="nebula nebula-2"></div>
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div id="space-banners"></div>
+                <canvas id="space3d-canvas"></canvas>
+                <div class="landing-center">
+                    <p class="landing-kicker">THE DIGITAL GAME ARCHIVE</p>
+                    <img id="landing-logo" class="landing-logo" src="https://raw.githubusercontent.com/gibrilphil/CampusGamesDataBase/refs/heads/main/MFR/whitelogo.png" alt="STEAM REVOLVER">
+                    <p class="landing-sub">A universe of games, ready to explore.</p>
+                    <button id="explore-btn" class="landing-cta">
+                        <span>Explore Library</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <div class="scroll-hint"><span></span>SCROLL TO DISCOVER</div>
+                </div>
+            </section>
+
+            <!-- Featured + Recently Added -->
+            <section id="featured-section">
+                <div class="featured-grid">
+                    <div class="featured-main">
+                        <div id="hero-banner" class="hero-banner">
+                            <div class="hero-overlay">
+                                <p class="hero-tag">FEATURED SELECTION</p>
+                                <h2 id="hero-title">...</h2>
+                                <a id="hero-link" href="#" target="_blank" class="hero-cta">Play Now</a>
+                            </div>
+                            <button id="hero-prev" class="hero-nav prev"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button id="hero-next" class="hero-nav next"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <aside class="recent-panel">
+                        <div class="recent-header">
+                            <h2>Recently Added</h2>
+                            <span id="recent-count">0</span>
+                        </div>
+                        <div id="recent-list" class="recent-list"></div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section id="categories-section"></section>
+
+            <!-- Search Page -->
+            <section id="search-page" class="hidden">
+                <div class="search-header">
+                    <button id="search-close" class="back-btn">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back to library</span>
+                    </button>
+                    <h1>Find your next game.</h1>
+                    <p>Search the collection by title and explore every available banner.</p>
+                    <label class="search-input-wrap">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="search-input" type="search" placeholder="Search games..." autocomplete="off">
+                        <kbd>ESC</kbd>
+                    </label>
+                </div>
+                <div class="search-results-header">
+                    <span id="search-meta">Browse the full archive</span>
+                </div>
+                <div id="search-results" class="search-grid"></div>
+            </section>
+
+            <!-- Account Page -->
+            <section id="account-page" class="hidden">
+                <div class="search-header">
+                    <button id="account-close" class="back-btn">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back to library</span>
+                    </button>
+                    <div class="account-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h1>Your account</h1>
+                    <p>Games you've liked are cached locally and always appear here.</p>
+                </div>
+                <div class="search-results-header">
+                    <span id="account-meta">0 liked games</span>
+                </div>
+                <div id="account-results" class="search-grid"></div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
