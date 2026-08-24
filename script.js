@@ -142,7 +142,7 @@ let lastSignature = '';
 let liveTsvWarned = false;
 async function getTSVText() {
     // Cache-bust so new TSV edits are always picked up
-    const busted = `${TSV_URL}?v=${Date.now()}`;
+    const busted = `${encodeURI(TSV_URL)}?v=${Date.now()}`;
     try {
         return await fetchText(busted);
     } catch (e) {

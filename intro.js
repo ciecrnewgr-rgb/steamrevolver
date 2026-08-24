@@ -47,7 +47,16 @@ async function init() {
         // Fetch game banner images
         let gameImages = [];
         try {
-            const text = (typeof GAME_TSV !== 'undefined' && GAME_TSV) ? GAME_TSV : await fetchText(TSV_URL);
+            let text;
+            try {
+                text = await fetchText(`${encodeURI(TSV_URL)}?v=${Date.now()}`);
+            } catch (fetchErr) {
+                if (typeof GAME_TSV !== 'undefined' && GAME_TSV) {
+                    text = GAME_TSV;
+                } else {
+                    throw fetchErr;
+                }
+            }
             const rows = text.trim().split('\n');
             const headers = rows[0].split('\t').map(h => h.trim().replace(/^["']|["']$/g, ''));
             const games = rows.slice(1).map(row => {
